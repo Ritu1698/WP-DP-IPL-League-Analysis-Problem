@@ -21,7 +21,7 @@ public class IPLAnalyserTest {
     }
 
     @Test
-    public void givenDataShouldReturn_whenSortedOnBattingAverages_shouldReturnBatsmanWithHighestAverageCricketer() {
+    public void givenData_whenSortedOnBattingAverages_shouldReturnBatsmanWithHighestAverageCricketer() {
         try {
             IPLAnalyser iPLAnalyser = new IPLAnalyser();
             iPLAnalyser.loadIPLData(IPL_CSV_FILE_PATH);
@@ -35,7 +35,7 @@ public class IPLAnalyserTest {
     }
 
     @Test
-    public void givenDataShouldReturnBatsman_whenSortedOnStrikingRates_shouldReturnHighestStrikingRatedCricketer() {
+    public void givenData_whenSortedOnStrikingRates_shouldReturnHighestStrikingRatedCricketer() {
         try {
             IPLAnalyser iPLAnalyser = new IPLAnalyser();
             iPLAnalyser.loadIPLData(IPL_CSV_FILE_PATH);
@@ -48,5 +48,18 @@ public class IPLAnalyserTest {
         }
     }
 
+    @Test
+    public void givenData_whenSortedOn6sAnd4s_shouldReturnHighestStrikingRatedCricketer() {
+        try {
+            IPLAnalyser iPLAnalyser = new IPLAnalyser();
+            iPLAnalyser.loadIPLData(IPL_CSV_FILE_PATH);
+            String sortedIPLData = iPLAnalyser.getPlayersWithTop6sAnd4s();
+            IPLRuns[] iplRuns = new Gson().fromJson(sortedIPLData, IPLRuns[].class);
+            Assert.assertEquals("Andre Russell", iplRuns[0].player);
+        } catch (IPLException e) {
+            e.printStackTrace();
+
+        }
+    }
 
 }
