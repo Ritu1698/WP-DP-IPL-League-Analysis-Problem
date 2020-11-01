@@ -230,7 +230,7 @@ public class IPLAnalyser {
             Comparator<IPLWickets> iplComparator = Comparator.comparing(iplWickets -> iplWickets.strikeRate);
             this.descendingSortWickets(iplComparator);
             String json = new Gson().toJson(IPLCSVWickets);
-            Gson gson = new GsonBuilder().create();
+            Gson gson = new GsonBuilder().setPrettyPrinting().create();
             gson.toJson(IPLCSVWickets, writer);
             return json;
 
@@ -239,4 +239,23 @@ public class IPLAnalyser {
                     IPLException.ExceptionType.FILE_OR_HEADER_PROBLEM);
         }
     }
+
+    public String getBowlersWithHighestEconomy() throws IPLException{
+        try (Writer writer = new FileWriter("./src/test/resources/IPLBowlingBestEconomy.json")) {
+        if (IPLCSVWickets == null || IPLCSVWickets.size() == 0) {
+            throw new IPLException("Empty!!!", IPLException.ExceptionType.NO_DATA);
+        }
+        Comparator<IPLWickets> iplComparator = Comparator.comparing(iplWickets -> iplWickets.economy);
+        this.descendingSortWickets(iplComparator);
+        String json = new Gson().toJson(IPLCSVWickets);
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        gson.toJson(IPLCSVWickets, writer);
+        return json;
+
+    } catch (RuntimeException | IOException e) {
+        throw new IPLException(e.getMessage(),
+                IPLException.ExceptionType.FILE_OR_HEADER_PROBLEM);
+    }
+
+}
 }
