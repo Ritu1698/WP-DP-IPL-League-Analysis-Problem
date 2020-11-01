@@ -228,20 +228,13 @@ public class IPLAnalyserTest {
     }
 
     @Test
-    public void givenIPLDataFindBatsmanWithZeroMilestonesButWithBestAverages() throws IPLException {
-        IPLAnalyser iplAnalyser = new IPLAnalyser();
-        iplAnalyser.loadIPLData(IPL_CSV_RUNS_PATH);
-        String sorted = iplAnalyser.getPlayersWithTopHundredsorFifties();
-        IPLRuns[] runs = new Gson().fromJson(sorted, IPLRuns[].class);
-        String sortedBat = iplAnalyser.getPlayersWithTopAverages();
-        IPLRuns[] average = new Gson().fromJson(sortedBat, IPLRuns[].class);
+    public void givenIPLBattingFile_shouldGiveBatsmanWithNoHundredsAndFiftiesButBestAverage() throws IPLException {
 
-        for (int i = 0; i < runs.length; i++) {
-            if (runs[runs.length - 1 - i].player.equals(average[i].player)) {
-                Assert.assertEquals("Shane Watson", average[i].player);
-                break;
-            }
-        }
+            IPLAnalyser iplAnalyser = new IPLAnalyser();
+            iplAnalyser.loadIPLDataWkts(IPL_CSV_WICKETS_PATH);
+            String player = iplAnalyser.getBatsmanWithNoHundredsAndFiftiesButBestAverage();
+            Assert.assertEquals("Marcus Stoinis", player);
+
     }
 
 
