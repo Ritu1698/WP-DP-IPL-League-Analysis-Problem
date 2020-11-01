@@ -204,4 +204,13 @@ public class IPLAnalyserTest {
 
         }
     }
+
+    @Test
+    public void givenIPLDataFindCricketerWithBestBowlingAndBattingAverage() throws IPLException {
+        IPLAnalyser iplAnalyser = new IPLAnalyser();
+        iplAnalyser.loadIPLDataWkts(IPL_CSV_WICKETS_PATH);
+        iplAnalyser.loadIPLData(IPL_CSV_RUNS_PATH);
+        String bestAvg = iplAnalyser.getBestBattingAndBowlingAverage();
+        Assert.assertEquals("Imran Tahir", bestAvg);
+    }
 }
