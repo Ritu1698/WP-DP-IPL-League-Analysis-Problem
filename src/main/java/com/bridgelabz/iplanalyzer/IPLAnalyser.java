@@ -241,26 +241,26 @@ public class IPLAnalyser {
         }
     }
 
-    public String getBowlersWithHighestEconomy() throws IPLException{
+    public String getBowlersWithHighestEconomy() throws IPLException {
         try (Writer writer = new FileWriter("./src/test/resources/IPLBowlingBestEconomy.json")) {
-        if (IPLCSVWickets == null || IPLCSVWickets.size() == 0) {
-            throw new IPLException("Empty!!!", IPLException.ExceptionType.NO_DATA);
-        }
-        Comparator<IPLWickets> iplComparator = Comparator.comparing(iplWickets -> iplWickets.economy);
-        this.descendingSortWickets(iplComparator);
-        String json = new Gson().toJson(IPLCSVWickets);
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        gson.toJson(IPLCSVWickets, writer);
-        return json;
+            if (IPLCSVWickets == null || IPLCSVWickets.size() == 0) {
+                throw new IPLException("Empty!!!", IPLException.ExceptionType.NO_DATA);
+            }
+            Comparator<IPLWickets> iplComparator = Comparator.comparing(iplWickets -> iplWickets.economy);
+            this.descendingSortWickets(iplComparator);
+            String json = new Gson().toJson(IPLCSVWickets);
+            Gson gson = new GsonBuilder().setPrettyPrinting().create();
+            gson.toJson(IPLCSVWickets, writer);
+            return json;
 
-    } catch (RuntimeException | IOException e) {
-        throw new IPLException(e.getMessage(),
-                IPLException.ExceptionType.FILE_OR_HEADER_PROBLEM);
+        } catch (RuntimeException | IOException e) {
+            throw new IPLException(e.getMessage(),
+                    IPLException.ExceptionType.FILE_OR_HEADER_PROBLEM);
+        }
+
     }
 
-}
-
-    public String getBowlersWithTopStrikingRateAnd4w5w() throws IPLException{
+    public String getBowlersWithTopStrikingRateAnd4w5w() throws IPLException {
         try (Writer writer = new FileWriter("./src/test/resources/IPLBowlingBestSRWithWickets.json")) {
             if (IPLCSVWickets == null || IPLCSVWickets.size() == 0) {
                 throw new IPLException("Empty!!!", IPLException.ExceptionType.NO_DATA);
@@ -297,7 +297,7 @@ public class IPLAnalyser {
         }
     }
 
-    public String getBowlersWithMaxWickets() throws IPLException{
+    public String getBowlersWithMaxWickets() throws IPLException {
         try (Writer writer = new FileWriter("./src/test/resources/IPLBowlingMostWickets.json")) {
             if (IPLCSVWickets == null || IPLCSVWickets.size() == 0) {
                 throw new IPLException("No data", IPLException.ExceptionType.NO_DATA);
@@ -317,11 +317,11 @@ public class IPLAnalyser {
 
     public String getBestBattingAndBowlingAverage() {
         Comparator<IPLWickets> bowlerComparator = Comparator.comparing(IPLWickets::getWickets).reversed().thenComparing(IPLWickets::getAvg);
-        List<IPLWickets> bowlerMaxWicketsAndBestAverage= IPLCSVWickets.stream().filter(bowler -> bowler.getAvg() > 0).sorted(bowlerComparator).collect(Collectors.toList());
+        List<IPLWickets> bowlerMaxWicketsAndBestAverage = IPLCSVWickets.stream().filter(bowler -> bowler.getAvg() > 0).sorted(bowlerComparator).collect(Collectors.toList());
         return bowlerMaxWicketsAndBestAverage.get(0).player;
     }
 
-    public String getBestAllRounder(IPLRuns[] runs, IPLWickets[] wickets){
+    public String getBestAllRounder(IPLRuns[] runs, IPLWickets[] wickets) {
 
         for (int i = 0; i < runs.length; i++) {
             for (int j = wickets.length - 1; j >= 0; j--)
