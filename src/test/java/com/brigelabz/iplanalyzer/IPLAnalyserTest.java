@@ -161,4 +161,18 @@ public class IPLAnalyserTest {
 
         }
     }
+
+    @Test
+    public void givenData_whenSortedOnEconomyRate_ShouldReturnBowlerWithHighestStrikingRateAnd5w4w() {
+        try {
+            IPLAnalyser iPLAnalyser = new IPLAnalyser();
+            iPLAnalyser.loadIPLDataWkts(IPL_CSV_WICKETS_PATH);
+            String sortedIPLData = iPLAnalyser.getBowlersWithTopStrikingRateAnd4w5w();
+            IPLWickets[] iplRuns = new Gson().fromJson(sortedIPLData, IPLWickets[].class);
+            Assert.assertEquals("Liam Livingstone", iplRuns[iplRuns.length - 1].player);
+        } catch (IPLException e) {
+            e.printStackTrace();
+
+        }
+    }
 }
