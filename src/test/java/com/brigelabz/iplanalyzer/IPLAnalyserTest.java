@@ -21,7 +21,7 @@ public class IPLAnalyserTest {
     }
 
     @Test
-    public void givenDataShouldReturn_whenSortedOnBattingAverages_shouldReturnBatsmanWithHighestAverage() {
+    public void givenDataShouldReturn_whenSortedOnBattingAverages_shouldReturnBatsmanWithHighestAverageCricketer() {
         try {
             IPLAnalyser iPLAnalyser = new IPLAnalyser();
             iPLAnalyser.loadIPLData(IPL_CSV_FILE_PATH);
@@ -35,7 +35,7 @@ public class IPLAnalyserTest {
     }
 
     @Test
-    public void givenDataShouldReturnBatsman_whenSortedOnStrikingRates_shouldReturnHighestSR() {
+    public void givenDataShouldReturnBatsman_whenSortedOnStrikingRates_shouldReturnHighestStrikingRatedCricketer() {
         try {
             IPLAnalyser iPLAnalyser = new IPLAnalyser();
             iPLAnalyser.loadIPLData(IPL_CSV_FILE_PATH);
@@ -47,4 +47,6 @@ public class IPLAnalyserTest {
 
         }
     }
+
+
 }
