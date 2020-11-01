@@ -3,6 +3,7 @@ package com.brigelabz.iplanalyzer;
 import com.bridgelabz.iplanalyzer.IPLAnalyser;
 import com.bridgelabz.iplanalyzer.IPLException;
 import com.bridgelabz.iplanalyzer.IPLRuns;
+import com.bridgelabz.iplanalyzer.IPLWickets;
 import com.google.gson.Gson;
 import org.junit.Assert;
 import org.junit.Test;
@@ -114,6 +115,21 @@ public class IPLAnalyserTest {
             Assert.assertEquals(99, numOfRecords);
         } catch (IPLException e) {
             e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void givenData_whenSortedOnBowlingAverages_shouldReturnHighestAverageBowler() {
+        try {
+            IPLAnalyser iPLAnalyser = new IPLAnalyser();
+            iPLAnalyser.loadIPLDataWkts(IPL_CSV_WICKETS_PATH);
+            String sortedIPLData = iPLAnalyser.getBowlersWithTopAverage();
+            IPLWickets[] iplRuns = new Gson().fromJson(sortedIPLData, IPLWickets[].class);
+            int index = iPLAnalyser.getPlayerIndex(iplRuns);
+            Assert.assertEquals("Krishnappa Gowtham", iplRuns[index].player);
+        } catch (IPLException e) {
+            e.printStackTrace();
+
         }
     }
 }
