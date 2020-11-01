@@ -163,4 +163,18 @@ public class IPLAnalyser {
         }
     }
 
+    public int loadIPLDataWkts(String iplCsvWicketsPath) throws IPLException {
+        try (Reader reader = Files.newBufferedReader(Paths.get(iplCsvWicketsPath));) {
+            IPLCSVList = CSVBuilderFactory.createCSVBuilder().getCSVFList(reader, IPLWickets.class);
+            return IPLCSVList.size();
+
+        } catch (IOException | CSVBuilderException e) {
+            throw new IPLException(e.getMessage(),
+                    IPLException.ExceptionType.IPL_FILE_PROBLEM);
+        } catch (RuntimeException e) {
+            throw new IPLException(e.getMessage(),
+                    IPLException.ExceptionType.FILE_OR_HEADER_PROBLEM);
+        }
+
+    }
 }
