@@ -147,4 +147,18 @@ public class IPLAnalyserTest {
 
         }
     }
+
+    @Test
+    public void givenData_whenSortedOnEconomyRate_ShouldReturnBowlerWithHighestEconomy() {
+        try {
+            IPLAnalyser iPLAnalyser = new IPLAnalyser();
+            iPLAnalyser.loadIPLDataWkts(IPL_CSV_WICKETS_PATH);
+            String sortedIPLData = iPLAnalyser.getBowlersWithHighestEconomy();
+            IPLWickets[] iplRuns = new Gson().fromJson(sortedIPLData, IPLWickets[].class);
+            Assert.assertEquals("Ben Cutting", iplRuns[0].player);
+        } catch (IPLException e) {
+            e.printStackTrace();
+
+        }
+    }
 }
