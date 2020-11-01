@@ -21,13 +21,27 @@ public class IPLAnalyserTest {
     }
 
     @Test
-    public void givenDataShouldReturn_whenSorted_shouldReturnBatsmanWithHighestAverage() {
+    public void givenDataShouldReturn_whenSortedOnBattingAverages_shouldReturnBatsmanWithHighestAverage() {
         try {
             IPLAnalyser iPLAnalyser = new IPLAnalyser();
             iPLAnalyser.loadIPLData(IPL_CSV_FILE_PATH);
             String sortCensusData = iPLAnalyser.getPlayersWithTopAverages();
             IPLRuns[] iplRuns = new Gson().fromJson(sortCensusData, IPLRuns[].class);
             Assert.assertEquals("MS Dhoni", iplRuns[0].player);
+        } catch (IPLException e) {
+            e.printStackTrace();
+
+        }
+    }
+
+    @Test
+    public void givenDataShouldReturnBatsman_whenSortedOnStrikingRates_shouldReturnHighestSR() {
+        try {
+            IPLAnalyser iPLAnalyser = new IPLAnalyser();
+            iPLAnalyser.loadIPLData(IPL_CSV_FILE_PATH);
+            String sortCensusData = iPLAnalyser.getPlayersWithHighestStrikingRates();
+            IPLRuns[] iplRuns = new Gson().fromJson(sortCensusData, IPLRuns[].class);
+            Assert.assertEquals("Ishant Sharma", iplRuns[0].player);
         } catch (IPLException e) {
             e.printStackTrace();
 
