@@ -11,6 +11,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class IPLAnalyser {
     List<IPLRuns> IPLCSVRuns = null;
@@ -312,5 +313,11 @@ public class IPLAnalyser {
             throw new IPLException(e.getMessage(),
                     IPLException.ExceptionType.FILE_OR_HEADER_PROBLEM);
         }
+    }
+
+    public String getBestBattingAndBowlingAverage() {
+        Comparator<IPLWickets> bowlerComparator = Comparator.comparing(IPLWickets::getWickets).reversed().thenComparing(IPLWickets::getAvg);
+        List<IPLWickets> bowlerMaxWicketsAndBestAverage= IPLCSVWickets.stream().filter(bowler -> bowler.getAvg() > 0).sorted(bowlerComparator).collect(Collectors.toList());
+        return bowlerMaxWicketsAndBestAverage.get(0).player;
     }
 }
