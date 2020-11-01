@@ -221,4 +221,22 @@ public class IPLAnalyser {
             }
         }
     }
+
+    public String getBowlersWithHighestStrikingRate() throws IPLException {
+        try (Writer writer = new FileWriter("./src/test/resources/IPLBowlingBestSR.json")) {
+            if (IPLCSVWickets == null || IPLCSVWickets.size() == 0) {
+                throw new IPLException("Empty!!!", IPLException.ExceptionType.NO_DATA);
+            }
+            Comparator<IPLWickets> iplComparator = Comparator.comparing(iplWickets -> iplWickets.strikeRate);
+            this.descendingSortWickets(iplComparator);
+            String json = new Gson().toJson(IPLCSVWickets);
+            Gson gson = new GsonBuilder().create();
+            gson.toJson(IPLCSVWickets, writer);
+            return json;
+
+        } catch (RuntimeException | IOException e) {
+            throw new IPLException(e.getMessage(),
+                    IPLException.ExceptionType.FILE_OR_HEADER_PROBLEM);
+        }
+    }
 }
