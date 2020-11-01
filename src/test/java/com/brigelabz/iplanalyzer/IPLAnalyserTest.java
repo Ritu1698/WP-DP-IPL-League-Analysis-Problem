@@ -226,4 +226,23 @@ public class IPLAnalyserTest {
         String bestAllRounder = iplAnalyser.getBestAllRounder(runs, wickets);
         Assert.assertEquals("Andre Russell", bestAllRounder);
     }
+
+    @Test
+    public void givenIPLDataFindBatsmanWithZeroMilestonesButWithBestAverages() throws IPLException {
+        IPLAnalyser iplAnalyser = new IPLAnalyser();
+        iplAnalyser.loadIPLData(IPL_CSV_RUNS_PATH);
+        String sorted = iplAnalyser.getPlayersWithTopHundredsorFifties();
+        IPLRuns[] runs = new Gson().fromJson(sorted, IPLRuns[].class);
+        String sortedBat = iplAnalyser.getPlayersWithTopAverages();
+        IPLRuns[] average = new Gson().fromJson(sortedBat, IPLRuns[].class);
+
+        for (int i = 0; i < runs.length; i++) {
+            if (runs[runs.length - 1 - i].player.equals(average[i].player)) {
+                Assert.assertEquals("Shane Watson", average[i].player);
+                break;
+            }
+        }
+    }
+
+
 }
