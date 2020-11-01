@@ -66,4 +66,60 @@ public class IPLRuns {
                 ", sixes=" + sixes +
                 '}';
     }
+
+    public int getPosition() {
+        return position;
+    }
+
+    public String getPlayer() {
+        return player;
+    }
+
+    public int getMatches() {
+        return matches;
+    }
+
+    public double getStrikeRate() {
+        return strikeRate;
+    }
+
+    public double getAvg() {
+        return avg;
+    }
+
+    public int getSixes() {
+        return sixes;
+    }
+
+    public int getInnings() {
+        return innings;
+    }
+
+    public int getNotOuts() {
+        return notOuts;
+    }
+
+    public int getRuns() {
+        return runs;
+    }
+
+    public String getHighest() {
+        return highest;
+    }
+
+    public int getBf() {
+        return bf;
+    }
+
+    public int getHundreds() {
+        return hundreds;
+    }
+
+    public int getFifties() {
+        return fifties;
+    }
+
+    public int getFours() {
+        return fours;
+    }
 }
