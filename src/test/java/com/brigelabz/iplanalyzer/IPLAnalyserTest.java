@@ -228,7 +228,16 @@ public class IPLAnalyserTest {
     }
 
     @Test
-    public void givenIPLBattingFile_shouldGiveBatsmanWithNoHundredsAndFiftiesButBestAverage() throws IPLException {
+    public void givenIPLBattingFile_whenSorted_shouldReturnMaximumHundredsAndBestAveragePlayer() throws IPLException {
+            IPLAnalyser iplAnalyser = new IPLAnalyser();
+            iplAnalyser.loadIPLData(IPL_CSV_RUNS_PATH);
+            String player = iplAnalyser.getBatsmanWithMaximumHundredsAndBestAverage();
+            Assert.assertEquals("David Warner ", player);
+
+    }
+
+    @Test
+    public void givenIPLBattingFile_whenSorted_shouldReturnZeroHitHundredsAndFiftiesButBestAveragePlayer() throws IPLException {
 
             IPLAnalyser iplAnalyser = new IPLAnalyser();
             iplAnalyser.loadIPLDataWkts(IPL_CSV_WICKETS_PATH);
