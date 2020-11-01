@@ -76,5 +76,18 @@ public class IPLAnalyserTest {
         }
     }
 
+    @Test
+    public void givenData_whenSorted_ShouldReturnHighestAvgAndStrikingRateCricketer() {
+        try {
+            IPLAnalyser iPLAnalyser = new IPLAnalyser();
+            iPLAnalyser.loadIPLData(IPL_CSV_FILE_PATH);
+            String sortedIPLData = iPLAnalyser.getPlayersWithTopStrikingRateAndAverage();
+            IPLRuns[] iplRuns = new Gson().fromJson(sortedIPLData, IPLRuns[].class);
+            System.out.println(iplRuns[0].player);
+            Assert.assertEquals("MS Dhoni", iplRuns[0].player);
+        } catch (IPLException e) {
+            e.printStackTrace();
 
+        }
+    }
 }
