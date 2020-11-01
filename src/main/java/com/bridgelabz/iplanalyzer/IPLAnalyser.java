@@ -338,4 +338,11 @@ public class IPLAnalyser {
                 .sorted(batsmanComparator).collect(Collectors.toList());
         return batsmanNoHundredsFiftiesButBestAverage.get(0).player;
     }
+
+    public String getBatsmanWithMaximumHundredsAndBestAverage() {
+        Comparator<IPLRuns> batsmanComparator = Comparator.comparing(IPLRuns::getHundreds, Comparator.reverseOrder())
+                .thenComparing(IPLRuns::getAvg, Comparator.reverseOrder());
+        List<IPLRuns> batsmanMaximumHundredsAndBestAverage = IPLCSVRuns.stream().sorted(batsmanComparator).collect(Collectors.toList());
+        return batsmanMaximumHundredsAndBestAverage.get(0).player;
+    }
 }
