@@ -2,6 +2,8 @@ package com.brigelabz.iplanalyzer;
 
 import com.bridgelabz.iplanalyzer.IPLAnalyser;
 import com.bridgelabz.iplanalyzer.IPLException;
+import com.bridgelabz.iplanalyzer.IPLRuns;
+import com.google.gson.Gson;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -15,6 +17,20 @@ public class IPLAnalyserTest {
             Assert.assertEquals(101, numOfRecords);
         } catch (IPLException e) {
             e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void givenDataShouldReturn_whenSorted_shouldReturnBatsmanWithHighestAverage() {
+        try {
+            IPLAnalyser iPLAnalyser = new IPLAnalyser();
+            iPLAnalyser.loadIPLData(IPL_CSV_FILE_PATH);
+            String sortCensusData = iPLAnalyser.getPlayersWithTopAverages();
+            IPLRuns[] iplRuns = new Gson().fromJson(sortCensusData, IPLRuns[].class);
+            Assert.assertEquals("MS Dhoni", iplRuns[0].player);
+        } catch (IPLException e) {
+            e.printStackTrace();
+
         }
     }
 }
