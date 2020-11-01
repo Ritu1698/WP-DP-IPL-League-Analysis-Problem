@@ -320,4 +320,15 @@ public class IPLAnalyser {
         List<IPLWickets> bowlerMaxWicketsAndBestAverage= IPLCSVWickets.stream().filter(bowler -> bowler.getAvg() > 0).sorted(bowlerComparator).collect(Collectors.toList());
         return bowlerMaxWicketsAndBestAverage.get(0).player;
     }
+
+    public String getBestAllRounder(IPLRuns[] runs, IPLWickets[] wickets){
+
+        for (int i = 0; i < runs.length; i++) {
+            for (int j = wickets.length - 1; j >= 0; j--)
+                if (runs[i].player.equals(wickets[j].player)) {
+                    return runs[i].player;
+                }
+        }
+        return null;
+    }
 }
