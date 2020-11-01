@@ -332,21 +332,10 @@ public class IPLAnalyser {
         return null;
     }
 
-    public String getPlayersWithTopHundredsorFifties() throws IPLException{
-        try (Writer writer = new FileWriter("./src/test/resources/IPLBattingAvg.json")) {
-            if (IPLCSVRuns == null || IPLCSVRuns.size() == 0) {
-                throw new IPLException("Empty!!!", IPLException.ExceptionType.NO_DATA);
-            }
-            Comparator<IPLRuns> censusComparator = Comparator.comparing(census -> census.avg);
-            this.descendingSort(censusComparator);
-            String json = new Gson().toJson(IPLCSVRuns);
-            Gson gson = new GsonBuilder().setPrettyPrinting().create();
-            gson.toJson(IPLCSVRuns, writer);
-            return json;
-
-        } catch (RuntimeException | IOException e) {
-            throw new IPLException(e.getMessage(),
-                    IPLException.ExceptionType.FILE_OR_HEADER_PROBLEM);
-        }
+    public String getBatsmanWithNoHundredsAndFiftiesButBestAverage() {
+        Comparator<IPLRuns> batsmanComparator = Comparator.comparing(IPLRuns::getAvg, Comparator.reverseOrder());
+        List<IPLRuns> batsmanNoHundredsFiftiesButBestAverage = IPLCSVRuns.stream().filter(batsman -> batsman.hundreds==0 && batsman.fifties==0)
+                .sorted(batsmanComparator).collect(Collectors.toList());
+        return batsmanNoHundredsFiftiesButBestAverage.get(0).player;
     }
 }
