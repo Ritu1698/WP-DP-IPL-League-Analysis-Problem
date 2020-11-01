@@ -15,7 +15,7 @@ public class IPLWickets {
     @CsvBindByName(column = "Inns")
     public int innings;
 
-    @CsvBindByName(column = "OV")
+    @CsvBindByName(column = "Ov")
     public double overs;
 
     @CsvBindByName(column = "Runs")
@@ -59,5 +59,108 @@ public class IPLWickets {
                 ", fourWicket=" + fourWicket +
                 ", fiveWicket=" + fiveWicket +
                 '}';
+    }
+    public int getPosition() {
+        return position;
+    }
+
+    public void setPosition(int position) {
+        this.position = position;
+    }
+
+    public String getPlayer() {
+        return player;
+    }
+
+    public void setPlayer(String player) {
+        this.player = player;
+    }
+
+    public int getMatches() {
+        return matches;
+    }
+
+    public void setMatches(int matches) {
+        this.matches = matches;
+    }
+
+    public int getInnings() {
+        return innings;
+    }
+
+    public void setInnings(int innings) {
+        this.innings = innings;
+    }
+
+    public double getOvers() {
+        return overs;
+    }
+
+    public void setOvers(double overs) {
+        this.overs = overs;
+    }
+
+    public int getRuns() {
+        return runs;
+    }
+
+    public void setRuns(int runs) {
+        this.runs = runs;
+    }
+
+    public int getWickets() {
+        return wickets;
+    }
+
+    public void setWickets(int wickets) {
+        this.wickets = wickets;
+    }
+
+    public int getBbi() {
+        return bbi;
+    }
+
+    public void setBbi(int bbi) {
+        this.bbi = bbi;
+    }
+
+    public double getAvg() {
+        return avg;
+    }
+
+    public void setAvg(double avg) {
+        this.avg = avg;
+    }
+
+    public double getEconomy() {
+        return economy;
+    }
+
+    public void setEconomy(double economy) {
+        this.economy = economy;
+    }
+
+    public double getStrikeRate() {
+        return strikeRate;
+    }
+
+    public void setStrikeRate(double strikeRate) {
+        this.strikeRate = strikeRate;
+    }
+
+    public int getFourWicket() {
+        return fourWicket;
+    }
+
+    public void setFourWicket(int fourWicket) {
+        this.fourWicket = fourWicket;
+    }
+
+    public int getFiveWicket() {
+        return fiveWicket;
+    }
+
+    public void setFiveWicket(int fiveWicket) {
+        this.fiveWicket = fiveWicket;
     }
 }
