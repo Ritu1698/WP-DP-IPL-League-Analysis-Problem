@@ -90,4 +90,18 @@ public class IPLAnalyserTest {
 
         }
     }
+
+    @Test
+    public void givenData_whenSorted_ShouldReturnMaxRunsAndAverageCricketer() {
+        try {
+            IPLAnalyser iPLAnalyser = new IPLAnalyser();
+            iPLAnalyser.loadIPLData(IPL_CSV_FILE_PATH);
+            String sortedIPLData = iPLAnalyser.getPlayersWithMaxRunsAndAverage();
+            IPLRuns[] iplRuns = new Gson().fromJson(sortedIPLData, IPLRuns[].class);
+            Assert.assertEquals("David Warner ", iplRuns[0].player);
+        } catch (IPLException e) {
+            e.printStackTrace();
+
+        }
+    }
 }
