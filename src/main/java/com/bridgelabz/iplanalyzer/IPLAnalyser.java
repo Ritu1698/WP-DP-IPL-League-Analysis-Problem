@@ -295,4 +295,22 @@ public class IPLAnalyser {
                     IPLException.ExceptionType.FILE_OR_HEADER_PROBLEM);
         }
     }
+
+    public String getBowlersWithMaxWickets() throws IPLException{
+        try (Writer writer = new FileWriter("./src/test/resources/IPLBowlingMostWickets.json")) {
+            if (IPLCSVWickets == null || IPLCSVWickets.size() == 0) {
+                throw new IPLException("No data", IPLException.ExceptionType.NO_DATA);
+            }
+            Comparator<IPLWickets> iplComparator = Comparator.comparing(IPLWickets::getWickets).thenComparing(IPLWickets::getAvg);
+            this.descendingSortWickets(iplComparator);
+            String json = new Gson().toJson(IPLCSVWickets);
+            Gson gson = new GsonBuilder().create();
+            gson.toJson(IPLCSVWickets, writer);
+            return json;
+
+        } catch (RuntimeException | IOException e) {
+            throw new IPLException(e.getMessage(),
+                    IPLException.ExceptionType.FILE_OR_HEADER_PROBLEM);
+        }
+    }
 }
