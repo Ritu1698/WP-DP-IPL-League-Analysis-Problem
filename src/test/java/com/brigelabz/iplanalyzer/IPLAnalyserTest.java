@@ -49,7 +49,7 @@ public class IPLAnalyserTest {
     }
 
     @Test
-    public void givenData_whenSortedOn6sAnd4s_shouldReturnHighestStrikingRatedCricketer() {
+    public void givenData_whenSortedOn6sAnd4s_shouldReturnHighestBoundaryCricketer() {
         try {
             IPLAnalyser iPLAnalyser = new IPLAnalyser();
             iPLAnalyser.loadIPLData(IPL_CSV_FILE_PATH);
@@ -61,5 +61,20 @@ public class IPLAnalyserTest {
 
         }
     }
+
+    @Test
+    public void givenData_whenSorted_shouldReturnHighestBoundaryAndStrikingRateCricketer() {
+        try {
+            IPLAnalyser iPLAnalyser = new IPLAnalyser();
+            iPLAnalyser.loadIPLData(IPL_CSV_FILE_PATH);
+            String sortedIPLData = iPLAnalyser.getPlayersWithTopStrikingRateAndBoundary();
+            IPLRuns[] iplRuns = new Gson().fromJson(sortedIPLData, IPLRuns[].class);
+            Assert.assertEquals("Andre Russell", iplRuns[0].player);
+        } catch (IPLException e) {
+            e.printStackTrace();
+
+        }
+    }
+
 
 }
