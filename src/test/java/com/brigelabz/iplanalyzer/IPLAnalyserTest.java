@@ -7,22 +7,26 @@ import com.bridgelabz.iplanalyzer.IPLWickets;
 import com.google.gson.Gson;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class IPLAnalyserTest {
     private static final String IPL_CSV_RUNS_PATH = "./src/test/resources/IPL2019FactsheetMostRuns.csv";
     private static final String IPL_CSV_WICKETS_PATH = "src/test/resources/IPL2019FactsheetMostWkts.csv";
     IPLAnalyser iplAnalyser = null;
 
+    //Initializing
     @Before
     public void setUP() {
         iplAnalyser = new IPLAnalyser();
     }
 
+    //Loading IPL Runs Data Testcase
     @Test
-    public void givenIPLRunsCSVFile_whenLoaded_shouldMatchRecordSizeCorrectly() {
+    public void myTestA_givenIPLRunsCSVFile_whenLoaded_shouldMatchSizeCorrectly() {
         try {
-
             int numOfRecords = iplAnalyser.loadIPLData(IPL_CSV_RUNS_PATH);
             Assert.assertEquals(101, numOfRecords);
         } catch (IPLException e) {
@@ -30,11 +34,12 @@ public class IPLAnalyserTest {
         }
     }
 
+    //Highest Batting Average Player Testcase
     @Test
-    public void givenData_whenSortedOnBattingAverages_shouldReturnBatsmanWithHighestAverageCricketer() {
+    public void myTestB_givenData_whenSortedOnBattingAverages_shouldReturnHighestAverageCricketer() {
         try {
             iplAnalyser.loadIPLData(IPL_CSV_RUNS_PATH);
-            String sortCensusData = iplAnalyser.getPlayersWithTopAverages();
+            String sortCensusData = iplAnalyser.getPlayersWithHighestBattingAverages();
             IPLRuns[] iplRuns = new Gson().fromJson(sortCensusData, IPLRuns[].class);
             Assert.assertEquals("MS Dhoni", iplRuns[0].player);
         } catch (IPLException e) {
@@ -43,8 +48,9 @@ public class IPLAnalyserTest {
         }
     }
 
+    //Highest Batting Striking Rates Player Testcase
     @Test
-    public void givenData_whenSortedOnStrikingRates_shouldReturnHighestStrikingRatedCricketer() {
+    public void myTestC_givenData_whenSortedOnStrikingRates_shouldReturnHighestStrikeRatedCricketer() {
         try {
 
             iplAnalyser.loadIPLData(IPL_CSV_RUNS_PATH);
@@ -57,8 +63,9 @@ public class IPLAnalyserTest {
         }
     }
 
+    //Highest Batting 6s & 4s Securing Player Testcase
     @Test
-    public void givenData_whenSortedOn6sAnd4s_shouldReturnHighestBoundaryCricketer() {
+    public void myTestD_givenData_whenSortedOn6sAnd4s_shouldReturnHighestBoundaryCricketer() {
         try {
 
             iplAnalyser.loadIPLData(IPL_CSV_RUNS_PATH);
@@ -71,11 +78,12 @@ public class IPLAnalyserTest {
         }
     }
 
+    //Highest Batting Striking Rates And 6s & 4s Securing Player Testcase
     @Test
-    public void givenData_whenSorted_shouldReturnHighestBoundaryAndStrikingRateCricketer() {
+    public void myTestE_givenData_whenSorted_shouldReturnHighest4s6sAndStrikingRateCricketer() {
         try {
             iplAnalyser.loadIPLData(IPL_CSV_RUNS_PATH);
-            String sortedIPLData = iplAnalyser.getPlayersWithTopStrikingRateAndBoundary();
+            String sortedIPLData = iplAnalyser.getPlayersWithTopStrikingRateAnd6sAnd4s();
             IPLRuns[] iplRuns = new Gson().fromJson(sortedIPLData, IPLRuns[].class);
             Assert.assertEquals("Andre Russell", iplRuns[0].player);
         } catch (IPLException e) {
@@ -84,8 +92,9 @@ public class IPLAnalyserTest {
         }
     }
 
+    //Highest Batting Striking Rates And Averages Player Testcase
     @Test
-    public void givenData_whenSorted_ShouldReturnHighestAvgAndStrikingRateCricketer() {
+    public void myTestF_givenData_whenSorted_ShouldReturnHighestAvgAndStrikingRateCricketer() {
         try {
             iplAnalyser.loadIPLData(IPL_CSV_RUNS_PATH);
             String sortedIPLData = iplAnalyser.getPlayersWithTopStrikingRateAndAverage();
@@ -98,8 +107,9 @@ public class IPLAnalyserTest {
         }
     }
 
+    //Highest Batting Striking Rates And Averages Player Testcase
     @Test
-    public void givenData_whenSorted_ShouldReturnMaxRunsAndAverageCricketer() {
+    public void myTestF_givenData_whenSorted_ShouldReturnMaxRunsAndAverageCricketer() {
         try {
 
             iplAnalyser.loadIPLData(IPL_CSV_RUNS_PATH);
@@ -112,8 +122,9 @@ public class IPLAnalyserTest {
         }
     }
 
+    //Loading IPL Wickets Data Testcase
     @Test
-    public void givenIPLRunsWicketsFile_whenLoaded_shouldMatchRecordSizeCorrectly() {
+    public void myTestG_givenIPLRunsWicketsFile_whenLoaded_shouldMatchRecordSizeCorrectly() {
         try {
             int numOfRecords = iplAnalyser.loadIPLDataWkts(IPL_CSV_WICKETS_PATH);
             Assert.assertEquals(99, numOfRecords);
@@ -122,8 +133,9 @@ public class IPLAnalyserTest {
         }
     }
 
+    //Highest Bowling Averages Player Testcase
     @Test
-    public void givenData_whenSortedOnBowlingAverages_shouldReturnHighestAverageBowler() {
+    public void myTestH_givenData_whenSorted_shouldReturnHighestAverageBowler() {
         try {
             iplAnalyser.loadIPLDataWkts(IPL_CSV_WICKETS_PATH);
             String sortedIPLData = iplAnalyser.getBowlersWithTopAverage();
@@ -136,8 +148,9 @@ public class IPLAnalyserTest {
         }
     }
 
+    //Highest Bowling Striking Rates Player Testcase
     @Test
-    public void givenData_whenSortedOnBowlingAverages_shouldReturnHighestStrikingRateBowler() {
+    public void myTestI_givenData_whenSorted_shouldReturnHighestStrikingRateBowler() {
         try {
             iplAnalyser.loadIPLDataWkts(IPL_CSV_WICKETS_PATH);
             String sortedIPLData = iplAnalyser.getBowlersWithHighestStrikingRate();
@@ -150,8 +163,9 @@ public class IPLAnalyserTest {
         }
     }
 
+    //Highest Bowling Economy Rate Player Testcase
     @Test
-    public void givenData_whenSortedOnEconomyRate_ShouldReturnBowlerWithHighestEconomy() {
+    public void myTestJ_givenData_whenSorted_ShouldReturnBowlerWithHighestEconomy() {
         try {
             iplAnalyser.loadIPLDataWkts(IPL_CSV_WICKETS_PATH);
             String sortedIPLData = iplAnalyser.getBowlersWithHighestEconomy();
@@ -163,8 +177,9 @@ public class IPLAnalyserTest {
         }
     }
 
+    //Highest Bowling Striking Rate And 4w 5w Player Testcase
     @Test
-    public void givenData_whenSortedOnEconomyRate_ShouldReturnBowlerWithHighestStrikingRateAnd5w4w() {
+    public void myTestK_givenData_whenSorted_ShouldReturnBowlerWithHighestStrikingRateAnd5w4w() {
         try {
             iplAnalyser.loadIPLDataWkts(IPL_CSV_WICKETS_PATH);
             String sortedIPLData = iplAnalyser.getBowlersWithTopStrikingRateAnd4w5w();
@@ -176,8 +191,9 @@ public class IPLAnalyserTest {
         }
     }
 
+    //Highest Bowling Striking Rate And Average Player Testcase
     @Test
-    public void givenData_whenSortedOnEconomyRate_ShouldReturnBowlerWithHighestStrikingRateAndAverage() {
+    public void myTestM_givenData_whenSorted_ShouldReturnBowlerWithHighestStrikingRateAndAverage() {
         try {
             iplAnalyser.loadIPLDataWkts(IPL_CSV_WICKETS_PATH);
             String sortedIPLData = iplAnalyser.getBowlersWithTopStrikingRateAndAverage();
@@ -190,8 +206,9 @@ public class IPLAnalyserTest {
         }
     }
 
+    //Highest Bowling Wickets Player Testcase
     @Test
-    public void givenData_whenSortedOnEconomyRate_ShouldReturnBowlerWithMaxWickets() {
+    public void myTestN_givenData_whenSorted_ShouldReturnBowlerWithMaxWickets() {
         try {
             iplAnalyser.loadIPLDataWkts(IPL_CSV_WICKETS_PATH);
             String sortedIPLData = iplAnalyser.getBowlersWithMaxWickets();
@@ -203,16 +220,18 @@ public class IPLAnalyserTest {
         }
     }
 
+    //Highest Bowling Or Batting Average Player Testcase
     @Test
-    public void givenData_whenSortedOnBowlingAndBatting_ShouldReturnBestAveragePlayer() throws IPLException {
+    public void myTestO_givenData_whenSortedOnBowlingAndBatting_ShouldReturnBestAveragePlayer() throws IPLException {
         iplAnalyser.loadIPLDataWkts(IPL_CSV_WICKETS_PATH);
         iplAnalyser.loadIPLData(IPL_CSV_RUNS_PATH);
         String bestAvg = iplAnalyser.getBestBattingAndBowlingAverage();
         Assert.assertEquals("Imran Tahir", bestAvg);
     }
 
+    //Highest Bowling Or Batting All Rounder Player Testcase
     @Test
-    public void givenData_whenSortedOnBowlingAndBattingAverages_ShouldReturnBestAllRounderPlayer() throws IPLException {
+    public void myTestP_givenData_whenSortedOnBowlingAndBattingAverages_ShouldReturnBestAllRounderPlayer() throws IPLException {
         iplAnalyser.loadIPLDataWkts(IPL_CSV_WICKETS_PATH);
         String sorted = iplAnalyser.getBowlersWithMaxWickets();
         IPLWickets[] wickets = new Gson().fromJson(sorted, IPLWickets[].class);
@@ -223,18 +242,20 @@ public class IPLAnalyserTest {
         Assert.assertEquals("Andre Russell", bestAllRounder);
     }
 
+    //Highest Batting 100s And Average Player Testcase
     @Test
-    public void givenIPLBattingFile_whenSorted_shouldReturnMaximumHundredsAndBestAveragePlayer() throws IPLException {
+    public void myTestQ_givenData_whenSorted_shouldReturnMaximumHundredsAndBestAveragePlayer() throws IPLException {
         iplAnalyser.loadIPLData(IPL_CSV_RUNS_PATH);
-        String player = iplAnalyser.getBatsmanWithMaximumHundredsAndBestAverage();
+        String player = iplAnalyser.getMaximumHundredsAndBestAverage();
         Assert.assertEquals("David Warner ", player);
 
     }
 
+    //Highest Batting Average But Zero 100s And 50s Player Testcase
     @Test
-    public void givenIPLBattingFile_whenSorted_shouldReturnZeroHitHundredsAndFiftiesButBestAveragePlayer() throws IPLException {
+    public void myTestR_givenIPLBattingFile_whenSorted_shouldReturnZeroHitHundredsAndFiftiesButBestAveragePlayer() throws IPLException {
         iplAnalyser.loadIPLDataWkts(IPL_CSV_WICKETS_PATH);
-        String player = iplAnalyser.getBatsmanWithNoHundredsAndFiftiesButBestAverage();
+        String player = iplAnalyser.getNoHundredsAndFiftiesButBestAverage();
         Assert.assertEquals("Marcus Stoinis", player);
 
     }
