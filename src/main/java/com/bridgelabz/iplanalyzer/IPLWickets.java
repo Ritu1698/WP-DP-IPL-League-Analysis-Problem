@@ -60,6 +60,7 @@ public class IPLWickets {
                 ", fiveWicket=" + fiveWicket +
                 '}';
     }
+
     public int getPosition() {
         return position;
     }

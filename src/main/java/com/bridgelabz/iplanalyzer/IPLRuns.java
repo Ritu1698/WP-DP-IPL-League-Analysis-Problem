@@ -2,8 +2,6 @@ package com.bridgelabz.iplanalyzer;
 
 import com.opencsv.bean.CsvBindByName;
 
-import com.opencsv.bean.CsvBindByName;
-
 public class IPLRuns {
     @CsvBindByName(column = "POS")
     public int position;
@@ -121,5 +119,9 @@ public class IPLRuns {
 
     public int getFours() {
         return fours;
+    }
+
+    public int getFoursAndSixes(){
+        return fours+sixes;
     }
 }

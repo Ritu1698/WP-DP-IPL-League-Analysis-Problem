@@ -2,8 +2,9 @@ package com.bridgelabz.iplanalyzer;
 
 public class CSVBuilderException extends Exception {
     enum ExceptionType {
-        IPL_FILE_PROBLEM,UNABLE_TO_PARSE
+        IPL_FILE_PROBLEM, UNABLE_TO_PARSE
     }
+
     ExceptionType type;
 
     public CSVBuilderException(String message, ExceptionType type) {
